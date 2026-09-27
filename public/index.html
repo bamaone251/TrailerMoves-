@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0e6b63" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Yard Board" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="icon" href="/icons/icon-192.png" />
+  <link rel="stylesheet" href="/styles.css" />
+  <title>Yard Door Board</title>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <h1>Yard Door Board</h1>
+    <p id="today">Live trailer &amp; loading communication</p>
+  </div>
+  <div class="header-actions">
+    <button id="installBtn" class="btn install" type="button" hidden>Install App</button>
+    <a class="btn ghost" href="/api/export/excel">Export Excel</a>
+    <a class="btn ghost" href="/api/export/pdf">Export PDF</a>
+  </div>
+</header>
+
+<main>
+  <section class="mode-switch" aria-label="Choose app view">
+    <button type="button" class="mode-btn active" data-mode="driver">
+      <span class="mode-icon">🚛</span>
+      <span><strong>Yard Driver</strong><small>Place &amp; remove trailers</small></span>
+    </button>
+    <button type="button" class="mode-btn" data-mode="desk">
+      <span class="mode-icon">📋</span>
+      <span><strong>Load Desk</strong><small>Assign runs &amp; loading status</small></span>
+    </button>
+  </section>
+
+  <section class="view-banner" id="viewBanner"></section>
+  <section class="summary" id="summary"></section>
+
+  <section class="toolbar">
+    <label>Show
+      <select id="filter">
+        <option>All</option>
+        <option>Empty</option>
+        <option>Available</option>
+        <option>Loading</option>
+        <option>Loading Complete</option>
+        <option>Out of Service</option>
+      </select>
+    </label>
+    <label>Operator
+      <input id="actor" maxlength="30" value="" placeholder="Name / role" autocomplete="name" />
+    </label>
+  </section>
+
+  <section class="grid" id="doorGrid" aria-live="polite"></section>
+
+  <section class="activity">
+    <div class="section-title"><h2>Today's Activity</h2><span id="eventCount"></span></div>
+    <div id="events"></div>
+  </section>
+</main>
+
+<dialog id="modal">
+  <form method="dialog" id="actionForm">
+    <div id="modalContent"></div>
+    <div class="modal-actions">
+      <button value="cancel" class="btn ghost" type="button" id="cancelAction">Cancel</button>
+      <button id="submitAction" value="default" class="btn primary" type="submit">Save</button>
+    </div>
+  </form>
+</dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

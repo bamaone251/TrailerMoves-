@@ -1,0 +1,13 @@
+services:
+  yard-door-board:
+    build: .
+    container_name: yard-door-board
+    restart: unless-stopped
+    ports:
+      - "3030:3030"
+    environment:
+      - TZ=America/Chicago
+      - PORT=3030
+    volumes:
+      - ./data:/app/data
+      - ./archives:/app/archives
